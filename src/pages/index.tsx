@@ -1,65 +1,72 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Layout from '../components/Layout'
+import styled from 'styled-components'
+import { Container, Row, Col } from 'react-awesome-styled-grid'
+import { useRouter } from 'next/router'
+
+const Title = styled.h1`
+  font-size: 72px;
+  line-height: 84.17px;
+  letter-spacing: 4px;
+
+  span {
+    font-weight: bold;
+  }
+`
+
+const Subtitle = styled.h2`
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 37px;
+  letter-spacing: 0em;
+  margin-top: 64px;
+`
+
+export const Button = styled.button`
+  background: #73d677;
+  box-shadow: inset 0px -9px 0px rgba(0, 0, 0, 0.18);
+  border-radius: 11px;
+  padding: 17px 36px;
+  margin-top: 64px;
+  width: fit-content;
+  border: none;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 23px;
+  line-height: 27px;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(.9)
+  }
+`
 
 export default function Home() {
+  const router = useRouter();
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+    <Layout>
+      <Container
+        style={{
+          paddingTop: 128,
+        }}
+      >
+        <Row reverse={['xs', 'sm']}>
+          <Col md={3}>
+            <Title>
+              <span>Find</span> all your favorite <span>Pokemon</span>
+            </Title>
+            <Subtitle>
+              You can know the type of Pokemon, its strengths, disadvantages and
+              abilities
+            </Subtitle>
+            <div style={{ marginBottom: 64 }}>
+              <Button onClick={() => router.push('/pokedex')}>See pokemons</Button>
+            </div>
+          </Col>
+          <Col md={5}>
+            <img style={{ width: '100%' }} src="/pikachu.png" alt="Pikachu lançando a pokebola" />
+          </Col>
+        </Row>
+      </Container>
+    </Layout>
   )
 }
