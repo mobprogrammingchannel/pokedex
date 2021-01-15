@@ -12,6 +12,13 @@ const customConf = {
     lg: 1.5,
     xl: 1.5,
   },
+  gutterWidth: {
+    xs: 1,
+    sm: 2.125,
+    md: 2.125,
+    lg: 2.125,
+    xl: 2.125,
+  },
 }
 
 function MyApp({ Component, pageProps }) {

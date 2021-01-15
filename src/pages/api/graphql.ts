@@ -23,6 +23,7 @@ const typeDefs = gql`
     base_experience: Int
     artworkUrl: String
     stats: PokemonStat
+    types: [String]
   }
 `
 
@@ -42,11 +43,13 @@ const resolvers = {
     async getPokemonsByType(_, { pokemonType, offset }, { dataSources }) {
       const response = await dataSources.pokemon.getPokemonsByType(pokemonType)
       if (!response?.pokemon) return []
-      
-      return response.pokemon.slice(offset, offset + 20).map(async ({ pokemon }) => {
-        const pokemonData = await dataSources.pokemon.getPokemon(pokemon.name)
-        return pokemonFormat(pokemonData)
-      })
+
+      return response.pokemon
+        .slice(offset, offset + 20)
+        .map(async ({ pokemon }) => {
+          const pokemonData = await dataSources.pokemon.getPokemon(pokemon.name)
+          return pokemonFormat(pokemonData)
+        })
     },
   },
 }
