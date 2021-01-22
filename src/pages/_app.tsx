@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components'
 import Reset from '../styles/reset'
 import GlobalStyles from '../styles/global'
 import Head from 'next/head'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const customConf = {
   mediaQuery: 'only screen',
@@ -21,17 +22,24 @@ const customConf = {
   },
 }
 
+const client = new ApolloClient({
+  uri: '/api/graphql',
+  cache: new InMemoryCache()
+});
+
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
         <title>Pokémon</title>
       </Head>
-      <ThemeProvider theme={{ awesomegrid: customConf }}>
-        <Reset />
-        <GlobalStyles />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={{ awesomegrid: customConf }}>
+          <Reset />
+          <GlobalStyles />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
     </>
   )
 }

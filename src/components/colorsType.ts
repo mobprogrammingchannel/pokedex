@@ -14,6 +14,7 @@ export default {
   fighting: '#F76545',
   dragon: '#F76545',
   normal: '#76AADB',
+  flying: '#A890F0',
   ground: '#9B897B',
   electric: '#F7C545',
 }

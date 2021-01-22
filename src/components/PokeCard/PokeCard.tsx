@@ -1,7 +1,23 @@
 import * as Styled from './styles'
 import colorsType from '../colorsType'
+
 type PokeCardProps = {
-  pokemon: any
+  pokemon: {
+    id: number
+    name: string
+    abilities: string[]
+    // eslint-disable-next-line camelcase
+    base_experience: number
+    artworkUrl: string
+    types: string[]
+    stats: {
+      hp: number
+      attack: number
+      defense: number
+      specialAttack: number
+      specialDefense: number
+    }
+  }
 }
 
 const PokeType = ({ type }) => {
@@ -46,7 +62,10 @@ const PokeCard = ({ pokemon }: PokeCardProps) => {
           </div>
         </div>
         <div style={{ width: '60%' }}>
-          <Styled.PokeImage />
+          <Styled.PokeImage
+            image={pokemon.artworkUrl}
+            color={colorsType[pokemon.types[0]]}
+          />
         </div>
       </div>
     </Styled.CardContainer>

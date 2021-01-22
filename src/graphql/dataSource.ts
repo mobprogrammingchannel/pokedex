@@ -8,8 +8,8 @@ class PokeAPI extends RESTDataSource {
     this.baseURL = 'https://pokeapi.co/api/v2/'
   }
 
-  async getAllPokemons() {
-    return this.get('pokemon')
+  async getAllPokemons(offset = 0) {
+    return this.get(`pokemon?limit=12&offset=${offset}`)
   }
 
   async getPokemon(id: string | number) {

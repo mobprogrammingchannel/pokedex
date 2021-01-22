@@ -46,7 +46,7 @@ export const SkillWrapper = styled.div`
   }
 `
 
-export const SkillTitle = styled.caption`
+export const SkillTitle = styled.span`
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -55,11 +55,17 @@ export const SkillTitle = styled.caption`
   text-align: center;
   color: #4b4b4b;
 `
-export const PokeImage = styled.div`
-  background-color: #70a83b;
+
+type PokeImageProps = {
+  image: string;
+  color: string;
+}
+
+export const PokeImage = styled.div<PokeImageProps>`
+  background-color: ${({ color }) => color};
   background-size: cover;
-  background-position: center;
-  background-image: url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png);
+  background-position: center 25%;
+  background-image: url(${({ image }) => image});
   height: 136px;
   border-radius: 0px 8px 8px 0px;
 `

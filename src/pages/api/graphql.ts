@@ -4,7 +4,8 @@ import pokemonFormat from '../../graphql/utils/pokemonFormat'
 
 const typeDefs = gql`
   type Query {
-    pokemons(id: Int): [Pokemon]
+    getPokemonCount: Int
+    pokemons(offset: Int): [Pokemon]
     getPokemonsByType(pokemonType: String, offset: Int): [Pokemon]
   }
 
@@ -29,8 +30,12 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    async pokemons(_, args, { dataSources }) {
-      const response = await dataSources.pokemon.getAllPokemons()
+    async getPokemonCount(_, p, {dataSources}) {
+      const { count } = await dataSources.pokemon.getAllPokemons();
+      return count
+    },
+    async pokemons(_, { offset }, { dataSources }) {
+      const response = await dataSources.pokemon.getAllPokemons(offset)
       if (response?.results) {
         return response.results.map(async (pokemon) => {
           const pokemonData = await dataSources.pokemon.getPokemon(pokemon.name)

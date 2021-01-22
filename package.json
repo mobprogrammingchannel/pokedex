@@ -12,6 +12,7 @@
     "check-types": "tsc"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.7",
     "apollo-datasource-rest": "^0.9.6",
     "apollo-server-micro": "^2.19.1",
     "camelcase-keys": "^6.2.2",
@@ -20,6 +21,8 @@
     "react": "17.0.1",
     "react-awesome-styled-grid": "^3.0.12",
     "react-dom": "17.0.1",
+    "react-infinite-scroll-component": "^5.1.0",
+    "react-lottie": "^1.2.3",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
