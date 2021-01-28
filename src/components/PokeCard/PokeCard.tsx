@@ -1,50 +1,23 @@
 import * as Styled from './styles'
 import colorsType from '../colorsType'
+import PokeBadge from '../PokeBadge'
+import { Pokemon } from '../../models/pokemon'
+import PokeStat from '../PokeStat'
 
 type PokeCardProps = {
-  pokemon: {
-    id: number
-    name: string
-    abilities: string[]
-    // eslint-disable-next-line camelcase
-    base_experience: number
-    artworkUrl: string
-    types: string[]
-    stats: {
-      hp: number
-      attack: number
-      defense: number
-      specialAttack: number
-      specialDefense: number
-    }
-  }
+  pokemon: Pokemon
+  onClick: (pokemon: Pokemon) => void
 }
 
-const PokeType = ({ type }) => {
+const PokeCard = ({ pokemon, onClick }: PokeCardProps) => {
   return (
-    <div>
-      <Styled.PokeBadge style={{ backgroundColor: colorsType[type] }}>
-        {type}
-      </Styled.PokeBadge>
-    </div>
-  )
-}
-
-const PokeCard = ({ pokemon }: PokeCardProps) => {
-  return (
-    <Styled.CardContainer>
+    <Styled.CardContainer onClick={() => onClick(pokemon)}>
       <div style={{ display: 'flex' }}>
         <div style={{ width: '40%', padding: '5px 0 12px 25px' }}>
           <Styled.CardTitle>{pokemon.name}</Styled.CardTitle>
           <div style={{ display: 'flex' }}>
-            <Styled.SkillWrapper>
-              <Styled.SkillItem>{pokemon.stats.attack}</Styled.SkillItem>
-              <Styled.SkillTitle>Attack</Styled.SkillTitle>
-            </Styled.SkillWrapper>
-            <Styled.SkillWrapper>
-              <Styled.SkillItem>{pokemon.stats.defense}</Styled.SkillItem>
-              <Styled.SkillTitle>Defense</Styled.SkillTitle>
-            </Styled.SkillWrapper>
+            <PokeStat label="Attack" value={pokemon.stats.attack} />
+            <PokeStat label="Defense" value={pokemon.stats.defense} />
           </div>
           <div style={{ position: 'relative' }}>
             <div
@@ -56,7 +29,7 @@ const PokeCard = ({ pokemon }: PokeCardProps) => {
               }}
             >
               {pokemon.types.map((type) => (
-                <PokeType key={`${pokemon.id}-${type}`} type={type} />
+                <PokeBadge key={`${pokemon.id}-${type}`} type={type} />
               ))}
             </div>
           </div>

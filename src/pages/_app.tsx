@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }) {
           <Reset />
           <GlobalStyles />
           <Component {...pageProps} />
+          <div id="modal-root" />
         </ThemeProvider>
       </ApolloProvider>
     </>

@@ -5,6 +5,8 @@ import Layout from '../../components/Layout'
 import PokeCard from '../../components/PokeCard'
 import SearchInput from './components/SearchInput'
 import Loading from '../../components/Loading'
+import Modal from '../../components/Modal'
+import { Pokemon } from '../../models/pokemon'
 
 import * as Styled from './styles'
 import { useLazyQuery, gql, useQuery } from '@apollo/client'
@@ -37,17 +39,11 @@ const POKEMON_QUERY = gql`
 `
 
 function Pokedex() {
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null)
   const [pokemons, setPokemons] = useState([])
   const { data } = useQuery(POKEMON_COUNT)
-  const [getPokemons, { data: pokeData }] = useLazyQuery(POKEMON_QUERY, {
-    onCompleted: (result) => {
-      // console.log("TCL ~ file: index.tsx ~ line 44 ~ Pokedex ~ result", result)
-      // setTimeout(() => {
-      //   setPokemons((oldPokemons) => [...oldPokemons, ...result?.pokemons])
-      // }, 2000)
-    },
-  })
-  console.log('TCL ~ file: index.tsx ~ line 43 ~ Pokedex ~ pokeData', pokeData)
+  const [getPokemons, { data: pokeData }] = useLazyQuery(POKEMON_QUERY)
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     getPokemons()
@@ -68,8 +64,20 @@ function Pokedex() {
       },
     })
   }
+
+  const handleCardClick = (pokemon: Pokemon) => {
+    setSelectedPokemon(pokemon)
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+    setSelectedPokemon(null)
+  }
+
   return (
     <Layout bgColor="#fff">
+      <button onClick={() => setShowModal(true)}>Modaaal</button>
       <Styled.Container>
         <Row>
           <Styled.Title>
@@ -90,12 +98,13 @@ function Pokedex() {
           <Row style={{ marginTop: 56 }}>
             {pokemons?.map((pokemon) => (
               <Col key={pokemon.id} sm={8 / 3} style={{ marginBottom: 45 }}>
-                <PokeCard pokemon={pokemon} />
+                <PokeCard pokemon={pokemon} onClick={handleCardClick} />
               </Col>
             ))}
           </Row>
         </InfiniteScroll>
       </Styled.Container>
+      {showModal && <Modal pokemon={selectedPokemon} onClose={closeModal} />}
     </Layout>
   )
 }
