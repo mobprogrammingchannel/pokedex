@@ -7,7 +7,7 @@ export const StyledBadge = styled.span`
   border-radius: 11px;
   padding: 2px 16px;
 
-  font-size: 12px;
+  /* font-size: 12px; */
   font-style: normal;
   font-weight: 400;
   line-height: 14px;

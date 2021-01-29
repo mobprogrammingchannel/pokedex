@@ -3,9 +3,10 @@ import { Row, Col } from 'react-awesome-styled-grid'
 
 import Layout from '../../components/Layout'
 import PokeCard from '../../components/PokeCard'
-import SearchInput from './components/SearchInput'
+import PokeAutoComplete from '../../components/PokeAutoComplete'
 import Loading from '../../components/Loading'
 import Modal from '../../components/Modal'
+
 import { Pokemon } from '../../models/pokemon'
 
 import * as Styled from './styles'
@@ -77,7 +78,6 @@ function Pokedex() {
 
   return (
     <Layout bgColor="#fff">
-      <button onClick={() => setShowModal(true)}>Modaaal</button>
       <Styled.Container>
         <Row>
           <Styled.Title>
@@ -86,7 +86,7 @@ function Pokedex() {
           </Styled.Title>
         </Row>
         <Row>
-          <SearchInput />
+          <PokeAutoComplete />
         </Row>
         <InfiniteScroll
           dataLength={pokemons?.length || 0}

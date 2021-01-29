@@ -4,6 +4,7 @@ export const CardContainer = styled.div`
   border-radius: 8px;
   background: #f6f7f9;
   box-shadow: 5px 5px 8px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 `
 
 export const CardTitle = styled.h3`
